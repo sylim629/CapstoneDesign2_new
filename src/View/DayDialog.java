@@ -112,7 +112,7 @@ public class DayDialog extends JDialog {
 		headerPanel = new JPanel();
 		headerPanel.setLayout(new BorderLayout());
 		headerPanel.setBorder(null);
-		headerPanel.setBackground(new Color(0xa8be37));
+		headerPanel.setBackground(new Color(0xDD9787));								// Background Color of Header
 		JLabel timeLabel = new JLabel();
 		timeLabel.setBorder(new EmptyBorder(0, 15, 0, 0));
 		timeLabel.setText(String.format("%04d. %02d. %02d.", yearNumber, monthNumber, dayNumber));
@@ -233,7 +233,7 @@ public class DayDialog extends JDialog {
 		JPanel subjectPanel = new JPanel();
 		subjectPanel.setLayout(new BorderLayout());
 		subjectPanel.setBackground(Color.WHITE);
-		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x049dd9)));
+		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x049dd9)));					
 
 		JLabel subjectLabel = new JLabel(s.getSubject());
 		subjectLabel.setForeground(Color.BLACK);
@@ -264,7 +264,7 @@ public class DayDialog extends JDialog {
 		} else {
 			JPanel sPanel = new JPanel();
 			sPanel.setLayout(new BorderLayout());
-			sPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x049dd9)));
+			sPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0xDD9787)));				// Border of Text Box "Tap add button~"
 			sPanel.setBackground(Color.WHITE);
 
 			JLabel subjectLabel = new JLabel("Tap add button to start your planner!");

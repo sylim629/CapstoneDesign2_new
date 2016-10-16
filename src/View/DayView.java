@@ -37,7 +37,7 @@ public class DayView extends JPanel {
 
 	public DayView() {
 		this.setLayout(new BorderLayout());
-		this.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0x36b1e1)));
+		this.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0xA39483)));			// Day Separating Line Color
 
 		scheduleBox = new JPanel();
 		this.add(scheduleBox, BorderLayout.NORTH);
@@ -84,9 +84,9 @@ public class DayView extends JPanel {
 				scPanel.setVisible(true);
 
 				if (isFocused)
-					scPanel.setBackground(new Color(0x049dd9));
+					scPanel.setBackground(new Color(0xFFCCC0));					// Color of new Schedule when created - when clicked
 				else
-					scPanel.setBackground(new Color(0x82ceec));
+					scPanel.setBackground(new Color(0xDD9787));					// Color of new Schedule when created - not clicked
 			}
 			for (int i = maxCount; i < scheduleList.size(); i++) {
 				JPanel scPanel = scheduleList.get(i);
@@ -98,25 +98,24 @@ public class DayView extends JPanel {
 			dayLabel.setFont(new Font("THEJung150", 0, 14));
 
 		if (isFocused) {
-			setBackground(new Color(0xffffff));
-			dayLabel.setForeground(new Color(0x049dd9));
+			setBackground(new Color(0xFFE5DF));									// Background Color of Day - when clicked
+			dayLabel.setForeground(new Color(0x45331F));						// Text Color - when clicked
 			dayLabel.setFont(new Font("THEJung150", 0, 14));
 		} else {
-			setBackground(new Color(0x049dd9));
-
+			setBackground(new Color(0x7A6C5D));									// Background Color of Day - not clicked
 			dayLabel.setForeground(Color.WHITE);
 			dayLabel.setFont(new Font("THEJung130", 0, 14));
 		}
 
 		if (prevMonth || nextMonth) {
-			dayLabel.setForeground(new Color(0x43b6e3));
+			dayLabel.setForeground(new Color(0xA39483));						// Color of Days Before and After Current Month
 			dayLabel.setFont(new Font("THEJung110", 0, 14));
 		}
 
 		scheduleBox.setBackground(getBackground());
 
 		if (isToday)
-			bottomBox.setBackground(new Color(0xa8be37));
+			bottomBox.setBackground(new Color(0xDD9787));							// Today Indicator Box Color
 		else
 			bottomBox.setBackground(getBackground());
 	}

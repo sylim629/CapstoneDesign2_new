@@ -87,10 +87,10 @@ public class MonthView extends JPanel {
 
 		headerFrame = new JPanel();
 		headerFrame.setLayout(new BorderLayout());
-		headerFrame.setBackground(new Color(0xa8be37));
+		headerFrame.setBackground(new Color(0xCD8777));										// Background color next to Month Name
 
 		JPanel headerText = new JPanel();
-		headerText.setBackground(new Color(0xa8be37));
+		headerText.setBackground(new Color(0xCD8777));										// Header Text Background color
 		headerText.setLayout(new BorderLayout());
 		headerYearLabel = new JLabel(Integer.toString(model.getYear()));
 		headerYearLabel.setFont(new Font("THEJung110", 0, 30));
@@ -162,7 +162,7 @@ public class MonthView extends JPanel {
 		headCalendar.setRowHeight(0, 30);
 		headCalendar.setFont(new Font("THEJung130", 0, 14));
 		headCalendar
-				.setBorder(new MatteBorder(1, 0, 0, 0, new Color(0xc2d273)));
+				.setBorder(new MatteBorder(1, 0, 0, 0, new Color(0xD58F7F)));				// Borderline under Header
 		headerFrame.add(headCalendar, BorderLayout.SOUTH);
 
 		contentFrame = new JPanel();
@@ -512,7 +512,7 @@ class CalendarCellRenderer extends DefaultTableCellRenderer {
 			boolean selected, boolean focused, int row, int column) {
 		if (isHeadCell) {
 			setHorizontalAlignment(JLabel.CENTER);
-			setBackground(new Color(0xa8be37));
+			setBackground(new Color(0xD58F7F));											// Weekday Backgound Color
 			setForeground(Color.WHITE);
 
 			super.getTableCellRendererComponent(table, value, false, false,

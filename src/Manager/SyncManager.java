@@ -50,14 +50,14 @@ public class SyncManager {
 				obj.put("created", s.getCreateDate().getTime());
 				obj.put("updated", s.getUpdateDate().getTime());
 				obj.put("is_deleted", s.getIsDeleted());
-				obj.put("sticker", s.getStiker());
-				JSONArray taggedFriends = s.getTaggedFriends();
-				ArrayList<String> taggedFriendsIdList = new ArrayList<>();
-				for (int i = 0; i < taggedFriends.size(); i++) {
-					JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(i);
-					taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
-				}
-				obj.put("tagged", (Object) s.getTaggedFriends());
+//				obj.put("sticker", s.getStiker());
+//				JSONArray taggedFriends = s.getTaggedFriends();
+//				ArrayList<String> taggedFriendsIdList = new ArrayList<>();
+//				for (int i = 0; i < taggedFriends.size(); i++) {
+//					JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(i);
+//					taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
+//				}
+				obj.put("tagged", s.getTaggedFriends());
 				// JSONObject objTaggedFriends = new JSONObject();
 				// for (String[] str : s.getTaggedFriends) {
 				// objTaggedFriends.put("user_id", str[0]);
@@ -132,13 +132,14 @@ public class SyncManager {
 					sc.setUpdateDate(new Date(Long.parseLong((String) obj.get("updated_date"))));
 					sc.setIsDeleted(Long.parseLong((String) obj.get("is_deleted")) != 0);
 					sc.setSticker(Integer.parseInt((String) obj.get("sticker")));
-					JSONArray taggedFriendsArray = (JSONArray) dataObject.get("tagged");
-					ArrayList<String> friendsArrayList = new ArrayList<String>();
-					for (int j = 0; j < taggedFriendsArray.size(); j++) {
-						JSONObject friendIdObj = (JSONObject) taggedFriendsArray.get(j);
-						friendsArrayList.add((String) friendIdObj.get("user_id"));
-					}
-					sc.setTaggedFriends(friendsArrayList);
+//					JSONArray taggedFriendsArray = (JSONArray) dataObject.get("tagged");
+					JSONArray taggedFriendsArray = (JSONArray) obj.get("tagged");
+//					ArrayList<String> friendsArrayList = new ArrayList<String>();
+//					for (int j = 0; j < taggedFriendsArray.size(); j++) {
+//						JSONObject friendIdObj = (JSONObject) taggedFriendsArray.get(j);
+//						friendsArrayList.add((String) friendIdObj.get("user_id"));
+//					}
+					sc.setTaggedFriendsDirect(taggedFriendsArray);
 					ScheduleManager.sharedInstance().updateSchedule(sc);
 				}
 

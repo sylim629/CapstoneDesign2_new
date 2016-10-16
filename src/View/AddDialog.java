@@ -27,10 +27,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import org.json.simple.JSONObject;
-
-import com.restfb.types.FriendList;
-
 import Manager.FriendsList;
 import Manager.ScheduleManager;
 import Manager.StickerManager;
@@ -330,6 +326,8 @@ public class AddDialog extends JDialog {
 					scheduleObject.setEndDate(schedule.getEndDate());
 					scheduleObject.setContent(schedule.getContent());
 					scheduleObject.setSticker(sticker);
+					ArrayList<String> taggedFriendsID = scheduleObject.getTaggedFriendsIdArrayList();
+					scheduleObject.setTaggedFriends(taggedFriendsID);
 					scheduleObject.update();
 				} else {
 					ScheduleManager.sharedInstance().addSchedule(schedule);

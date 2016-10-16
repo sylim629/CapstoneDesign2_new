@@ -73,6 +73,6 @@ public class Planner extends JFrame {
 				SyncManager.sharedInstance().synchronizeServer();
 			}
 		};
-		timer.scheduleAtFixedRate(task, new Date(), 30000);	// 30초마다 동기화
+		timer.scheduleAtFixedRate(task, new Date(), 20000);	// 20초마다 동기화
 	}
 }

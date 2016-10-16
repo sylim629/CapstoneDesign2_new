@@ -100,6 +100,15 @@ public class Schedule {
 	public JSONArray getTaggedFriends() {
 		return taggedFriends;
 	}
+	
+	public ArrayList<String> getTaggedFriendsIdArrayList() {
+		ArrayList<String> idList = new ArrayList<>();
+		for (int i = 0; i < taggedFriends.size(); i++) {
+			JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(i);
+			idList.add((String) taggedFriendObj.get("user_id"));
+		}
+		return idList;
+	}
 
 	public void setServerId(String id) {
 		serverId = id;
@@ -140,7 +149,12 @@ public class Schedule {
 	public void setSticker(int icon) {
 		sticker = icon;
 	}
+	
+	public void setTaggedFriendsDirect(JSONArray friendsArray) {
+		taggedFriends = friendsArray;
+	}
 
+	@SuppressWarnings("unchecked")
 	public void setTaggedFriends(ArrayList<String> friendsIdList) {
 		for (int i = 0; i < friendsIdList.size(); i++) {
 			JSONObject obj = new JSONObject();

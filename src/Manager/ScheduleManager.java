@@ -38,28 +38,29 @@ public class ScheduleManager {
 				int count = scanner.nextInt();
 				scanner.nextLine();
 				for (int i = 0; i < count; i++) {
-					Schedule obj = new Schedule();
-					obj.setServerId(String.valueOf(scanner.nextInt()));
-					obj.setIndex(i);
+					Schedule schedule = new Schedule();
+					schedule.setServerId(String.valueOf(scanner.nextInt()));
+					schedule.setIndex(i);
 					scanner.nextLine();
-					obj.setSubject(scanner.nextLine());
-					obj.setStartDate(new Date(scanner.nextLong()));
-					obj.setEndDate(new Date(scanner.nextLong()));
-					obj.setCreateDate(new Date(scanner.nextLong()));
-					obj.setUpdateDate(new Date(scanner.nextLong()));
-					obj.setSticker(scanner.nextInt());
+					schedule.setSubject(scanner.nextLine());
+					schedule.setStartDate(new Date(scanner.nextLong()));
+					schedule.setEndDate(new Date(scanner.nextLong()));
+					schedule.setCreateDate(new Date(scanner.nextLong()));
+					schedule.setUpdateDate(new Date(scanner.nextLong()));
+					schedule.setSticker(scanner.nextInt());
 					scanner.nextLine();
-					obj.setContent(scanner.nextLine());
-					obj.setIsDeleted(scanner.nextInt() != 0);
+					schedule.setContent(scanner.nextLine());
+					schedule.setIsDeleted(scanner.nextInt() != 0);
+					scanner.nextLine();
 					String taggedFriends = scanner.nextLine();
 					String[] taggedFriendsArray = taggedFriends.split("!@#");
 					ArrayList<String> taggedFriendsList = new ArrayList<>();
 					for (int j = 0; j < taggedFriendsArray.length; j++) {
 						taggedFriendsList.add(taggedFriendsArray[j]);
 					}
-					obj.setTaggedFriends(taggedFriendsList);
+					schedule.setTaggedFriends(taggedFriendsList);
 
-					scheduleList.add(obj);
+					scheduleList.add(schedule);
 				}
 
 				lastSyncTime = new Date(scanner.nextLong());

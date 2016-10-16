@@ -217,7 +217,7 @@ public class DayDialog extends JDialog {
 		content.removeAll();
 
 		content.setLayout(new BorderLayout());
-		content.setBackground(new Color(0x049dd9));
+		content.setBackground(new Color(0xE4ACA0));										// new Schedule Color
 
 		JLabel sLabel = new JLabel();
 		sLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -233,7 +233,7 @@ public class DayDialog extends JDialog {
 		JPanel subjectPanel = new JPanel();
 		subjectPanel.setLayout(new BorderLayout());
 		subjectPanel.setBackground(Color.WHITE);
-		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x049dd9)));					
+		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x0E4ACA0)));		// Border Color of new Schedule				
 
 		JLabel subjectLabel = new JLabel(s.getSubject());
 		subjectLabel.setForeground(Color.BLACK);

@@ -43,4 +43,13 @@ public class FriendsList {
 		}
 		return "fail";
 	}
+	
+	public String getFriendName(String id) {
+		for (int i = 0; i < friends.size(); i++) {
+			User user = friends.get(i);
+			if (user.getId().equals(id))
+				return user.getName();
+		}
+		return "fail";
+	}
 }

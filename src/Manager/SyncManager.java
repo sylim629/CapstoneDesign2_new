@@ -68,6 +68,7 @@ public class SyncManager {
 			}
 		}
 		buffer = new StringBuffer(JSONValue.toJSONString(jsonArray));
+		System.out.println(buffer);
 
 		// Synchronize Request
 		try {

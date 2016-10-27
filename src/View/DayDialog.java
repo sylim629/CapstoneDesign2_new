@@ -112,7 +112,8 @@ public class DayDialog extends JDialog {
 		headerPanel = new JPanel();
 		headerPanel.setLayout(new BorderLayout());
 		headerPanel.setBorder(null);
-		headerPanel.setBackground(new Color(0xDD9787));								// Background Color of Header
+		headerPanel.setBackground(new Color(0xDD9787)); // Background Color of
+														// Header
 		JLabel timeLabel = new JLabel();
 		timeLabel.setBorder(new EmptyBorder(0, 15, 0, 0));
 		timeLabel.setText(String.format("%04d. %02d. %02d.", yearNumber, monthNumber, dayNumber));
@@ -200,7 +201,7 @@ public class DayDialog extends JDialog {
 		scrollContent.setPreferredSize(new Dimension(dimension.width, 55 * scheduleJPanels.size() + 20));
 	}
 
-	public void updateContent(JPanel content, Schedule s) {
+	public void updateContent(JPanel content, Schedule schedule) {
 		MouseListener buttonListner = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -217,24 +218,20 @@ public class DayDialog extends JDialog {
 		content.removeAll();
 
 		content.setLayout(new BorderLayout());
-		content.setBackground(new Color(0xE4ACA0));										// new Schedule Color
+		content.setBackground(new Color(0xE4ACA0)); // new Schedule Color
 
 		JLabel sLabel = new JLabel();
 		sLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		// sLabel.setText(String.format(new SimpleDateFormat("HH:mm").format(s
-		// .getStartDate())
-		// + "-"
-		// + new SimpleDateFormat("HH:mm").format(s.getEndDate())));
-		// sLabel.setFont(new Font("THEJung130", 0, 14));
-		// sLabel.setForeground(Color.WHITE);
 		sLabel.setBackground(new Color(0x049dd9));
 		content.add(sLabel, BorderLayout.WEST);
 
 		JPanel subjectPanel = new JPanel();
 		subjectPanel.setLayout(new BorderLayout());
 		subjectPanel.setBackground(Color.WHITE);
-		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x0E4ACA0)));		// Border Color of new Schedule				
+		// Border color of new schedule
+		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x0E4ACA0)));
 
+		Schedule s = ScheduleManager.sharedInstance().getSchedule(schedule.getIndex());
 		JLabel subjectLabel = new JLabel(s.getSubject());
 		subjectLabel.setForeground(Color.BLACK);
 		subjectLabel.setFont(new Font("THEJung130", 0, 14));
@@ -242,7 +239,7 @@ public class DayDialog extends JDialog {
 		subjectPanel.add(subjectLabel);
 
 		content.add(subjectPanel, BorderLayout.CENTER);
-		content.setName(Integer.toString(s.getIndex()));
+		content.setName(Integer.toString(schedule.getIndex()));
 		content.addMouseListener(buttonListner);
 
 		scrollPanel.setVisible(false);
@@ -264,7 +261,13 @@ public class DayDialog extends JDialog {
 		} else {
 			JPanel sPanel = new JPanel();
 			sPanel.setLayout(new BorderLayout());
-			sPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0xDD9787)));				// Border of Text Box "Tap add button~"
+			sPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0xDD9787))); // Border
+																				// of
+																				// Text
+																				// Box
+																				// "Tap
+																				// add
+																				// button~"
 			sPanel.setBackground(Color.WHITE);
 
 			JLabel subjectLabel = new JLabel("Tap add button to start your planner!");

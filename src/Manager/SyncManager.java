@@ -50,25 +50,13 @@ public class SyncManager {
 				obj.put("created", s.getCreateDate().getTime());
 				obj.put("updated", s.getUpdateDate().getTime());
 				obj.put("is_deleted", s.getIsDeleted());
-//				obj.put("sticker", s.getStiker());
-//				JSONArray taggedFriends = s.getTaggedFriends();
-//				ArrayList<String> taggedFriendsIdList = new ArrayList<>();
-//				for (int i = 0; i < taggedFriends.size(); i++) {
-//					JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(i);
-//					taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
-//				}
 				obj.put("tagged", s.getTaggedFriends());
-				// JSONObject objTaggedFriends = new JSONObject();
-				// for (String[] str : s.getTaggedFriends) {
-				// objTaggedFriends.put("user_id", str[0]);
-				// }
 				jsonArray.add(obj);
-				// jsonArray.add(objTaggedFriends);
 				syncList.add(s);
 			}
 		}
 		buffer = new StringBuffer(JSONValue.toJSONString(jsonArray));
-		System.out.println(buffer);
+		System.out.println("\n" + buffer);
 
 		// Synchronize Request
 		try {
@@ -83,7 +71,6 @@ public class SyncManager {
 			wr.write("update_time=" + String.valueOf(syncTime.getTime() / 1000) + "&session_key="
 					+ LoginManager.sharedInstance().getSessionKey() + "&sync_data=" + buffer.toString());
 			wr.flush();
-			// 여기까지 서버로 정보를 전달 후 php가 알아서 처리. ㅇㅇ.
 
 			// Get the response
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
@@ -108,7 +95,7 @@ public class SyncManager {
 			if (s.getServerId().equals("-1"))
 				ScheduleManager.sharedInstance().deleteSchedule(s);
 		}
-		// System.out.print(buffer);
+
 		// Update Schedule
 		try {
 			JSONParser parser = new JSONParser();
@@ -116,10 +103,11 @@ public class SyncManager {
 
 			if (Long.parseLong((String) dataObject.get("code")) == 200) {
 				dataObject = (JSONObject) dataObject.get("data");
-
 				JSONArray serverSchedule = (JSONArray) dataObject.get("schedule");
+				
 				for (int i = 0; i < serverSchedule.size(); i++) {
 					JSONObject obj = (JSONObject) serverSchedule.get(i);
+					
 					Schedule sc = ScheduleManager.sharedInstance().getScheduleAtServerID((String) obj.get("id"));
 					if (sc == null)
 						sc = ScheduleManager.sharedInstance().addSchedule(new Schedule());
@@ -133,23 +121,15 @@ public class SyncManager {
 					sc.setUpdateDate(new Date(Long.parseLong((String) obj.get("updated_date"))));
 					sc.setIsDeleted(Long.parseLong((String) obj.get("is_deleted")) != 0);
 					sc.setSticker(Integer.parseInt((String) obj.get("sticker")));
-//					JSONArray taggedFriendsArray = (JSONArray) dataObject.get("tagged");
 					JSONArray taggedFriendsArray = (JSONArray) obj.get("tagged");
-//					ArrayList<String> friendsArrayList = new ArrayList<String>();
-//					for (int j = 0; j < taggedFriendsArray.size(); j++) {
-//						JSONObject friendIdObj = (JSONObject) taggedFriendsArray.get(j);
-//						friendsArrayList.add((String) friendIdObj.get("user_id"));
-//					}
 					sc.setTaggedFriendsDirect(taggedFriendsArray);
 					ScheduleManager.sharedInstance().updateSchedule(sc);
 				}
-
 				ScheduleManager.sharedInstance().setLastSyncTime(new Date((Long) dataObject.get("sync_date") * 1000));
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 		return true;
 	}
 }

@@ -156,7 +156,10 @@ public class Schedule {
 
 	@SuppressWarnings("unchecked")
 	public void setTaggedFriends(ArrayList<String> friendsIdList) {
+		taggedFriends.clear();
 		for (int i = 0; i < friendsIdList.size(); i++) {
+			if (friendsIdList.get(i).equals("fail"))
+				continue;
 			JSONObject obj = new JSONObject();
 			obj.put("user_id", friendsIdList.get(i));
 			obj.put("is_facebook", 1);
@@ -227,16 +230,7 @@ public class Schedule {
 		if (parent.EndDate != EndDate)
 			return false;
 
-		if (parent.CreateDate != CreateDate)
-			return false;
-
 		if (parent.isDeleted != isDeleted)
-			return false;
-
-		if (parent.sticker != sticker)
-			return false;
-
-		if (parent.taggedFriends != taggedFriends)
 			return false;
 
 		return true;

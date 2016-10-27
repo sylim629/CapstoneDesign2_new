@@ -56,6 +56,8 @@ public class ScheduleManager {
 					String[] taggedFriendsArray = taggedFriends.split("!@#");
 					ArrayList<String> taggedFriendsList = new ArrayList<>();
 					for (int j = 0; j < taggedFriendsArray.length; j++) {
+						if (taggedFriendsArray[0].isEmpty())
+							break;
 						taggedFriendsList.add(taggedFriendsArray[j]);
 					}
 					schedule.setTaggedFriends(taggedFriendsList);
@@ -89,22 +91,14 @@ public class ScheduleManager {
 				writer.write(String.valueOf(schedule.getStiker()) + "\n");
 				writer.write(schedule.getContent() + "\n");
 				writer.write(String.valueOf(schedule.getIsDeleted() ? 1 : 0) + "\n");
-//				writer.write(obj.getTaggedFriends() + "\n");
-//				JSONArray taggedFriends = schedule.getTaggedFriends();
 				ArrayList<String> taggedFriendsIdList = new ArrayList<>();
-//				for (int j = 0; j < taggedFriends.size(); j++) {
-//					JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(j);
-//					taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
-//				}
 				taggedFriendsIdList = schedule.getTaggedFriendsIdArrayList();
 				for (int j = 0; j < taggedFriendsIdList.size(); j++) {
 					writer.write(taggedFriendsIdList.get(j) + "!@#");
 				}
 				writer.write("\n");
 			}
-
 			writer.write(new Long(lastSyncTime.getTime()).toString() + "\n");
-
 			writer.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -113,7 +107,6 @@ public class ScheduleManager {
 
 	public void setLastSyncTime(Date date) {
 		lastSyncTime = date;
-
 		saveSchedule();
 	}
 
@@ -123,34 +116,26 @@ public class ScheduleManager {
 
 	public Schedule getScheduleAtServerID(String id) {
 		Schedule schedule = null;
-
 		for (Schedule s : scheduleList) {
 			if (s.getServerId().equals(id)) {
 				schedule = s.copy();
 				break;
 			}
 		}
-
 		return schedule;
 	}
 
 	public Schedule getSchedule(int index) {
 		Schedule schedule = null;
 
-		if (0 <= index && index < scheduleList.size()) {
+		if (0 <= index && index < scheduleList.size())
 			schedule = scheduleList.get(index).copy();
-		}
 
 		return schedule;
 	}
 
 	public ArrayList<Schedule> getSchedules() {
-		ArrayList<Schedule> returnList = new ArrayList<Schedule>();
-
-		for (Schedule s : scheduleList)
-			returnList.add(s.copy());
-
-		return returnList;
+		return scheduleList;
 	}
 
 	public ArrayList<Schedule> getSchedules(Date startDate, Date endDate) {
@@ -187,13 +172,8 @@ public class ScheduleManager {
 		newSchedule.setUpdateDate(new Date(System.currentTimeMillis()));
 		newSchedule.setSticker(schedule.getStiker());
 		newSchedule.setContent(schedule.getContent());
-//		JSONArray taggedFriends = schedule.getTaggedFriends();
 		ArrayList<String> taggedFriendsIdList = new ArrayList<>();
 		taggedFriendsIdList = schedule.getTaggedFriendsIdArrayList();
-//		for (int i = 0; i < taggedFriends.size(); i++) {
-//			JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(i);
-//			taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
-//		}
 		newSchedule.setTaggedFriends(taggedFriendsIdList);
 
 		scheduleList.add(newSchedule);
@@ -211,31 +191,24 @@ public class ScheduleManager {
 			return;
 
 		schedule.update();
-
 		saveSchedule();
 	}
 
-	public void deleteSchedule(Schedule schedule) {
-		if (schedule == null)
+	public void deleteSchedule(Schedule schedule2bDeleted) {
+		if (schedule2bDeleted == null)
 			return;
 
-		// ArrayList<Schedule> deleteList = new ArrayList<Schedule>();
-
-		for (Schedule s : scheduleList) {
-			if (s.getIndex() == schedule.getIndex()) {
-				s.setIsDeleted(true);
-				s.setUpdateDate(new Date(System.currentTimeMillis()));
+		for (Schedule schedule : scheduleList) {
+			if (schedule.getIndex() == schedule2bDeleted.getIndex()) {
+				schedule.setIsDeleted(true);
+				schedule.setUpdateDate(new Date(System.currentTimeMillis()));
 			}
-			// deleteList.add(s);
 		}
-		// for (Schedule s : deleteList) {
-		// scheduleList.remove(s);
-		// }
 
 		saveSchedule();
 
 		if (scheduleCallback != null)
-			scheduleCallback.onDeletedSchedule(schedule);
+			scheduleCallback.onDeletedSchedule(schedule2bDeleted);
 	}
 
 	public void setEventListener(Callbacks callback) {
@@ -255,7 +228,6 @@ public class ScheduleManager {
 	}
 
 	public static void Callbacks() {
-		// TODO Auto-generated method stub
 
 	}
 }

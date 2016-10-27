@@ -41,7 +41,7 @@ public class FriendsList {
 				return user.getId();
 			}
 		}
-		return "fail";
+		return null;
 	}
 	
 	public String getFriendName(String id) {
@@ -50,6 +50,6 @@ public class FriendsList {
 			if (user.getId().equals(id))
 				return user.getName();
 		}
-		return "fail";
+		return null;
 	}
 }

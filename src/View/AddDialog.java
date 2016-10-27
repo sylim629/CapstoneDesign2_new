@@ -262,14 +262,16 @@ public class AddDialog extends JDialog {
 		friendListLabel = new JLabel();
 		tagPanel.add(friendListLabel);
 		
-		ArrayList<String> taggedFriendsId = new ArrayList<>();
-		FriendsList friendsList = new FriendsList();
-		taggedFriendsId = scheduleObject.getTaggedFriendsIdArrayList();
-		String names = "";
-		for (int i = 0; i < taggedFriendsId.size(); i++) {
-			names += friendsList.getFriendName(taggedFriendsId.get(i)) + ",";
+		if (year == -1) {
+			ArrayList<String> taggedFriendsId = new ArrayList<>();
+			FriendsList friendsList = new FriendsList();
+			taggedFriendsId = scheduleObject.getTaggedFriendsIdArrayList();
+			String names = "";
+			for (int i = 0; i < taggedFriendsId.size(); i++) {
+				names += friendsList.getFriendName(taggedFriendsId.get(i)) + ",";
+			}
+			friendListLabel.setText(names);
 		}
-		friendListLabel.setText(names);
 
 		tagAtButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

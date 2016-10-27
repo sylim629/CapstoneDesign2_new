@@ -261,9 +261,10 @@ public class AddDialog extends JDialog {
 		tagPanel.add(tagAtButton);
 		friendListLabel = new JLabel();
 		tagPanel.add(friendListLabel);
-		
+
 		ArrayList<String> taggedFriendsId = new ArrayList<>();
 		FriendsList friendsList = new FriendsList();
+//		scheduleObject.toString();
 		taggedFriendsId = scheduleObject.getTaggedFriendsIdArrayList();
 		String names = "";
 		for (int i = 0; i < taggedFriendsId.size(); i++) {

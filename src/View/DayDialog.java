@@ -112,7 +112,8 @@ public class DayDialog extends JDialog {
 		headerPanel = new JPanel();
 		headerPanel.setLayout(new BorderLayout());
 		headerPanel.setBorder(null);
-		headerPanel.setBackground(new Color(0xDD9787));								// Background Color of Header
+		headerPanel.setBackground(new Color(0xDD9787)); // Background Color of
+														// Header
 		JLabel timeLabel = new JLabel();
 		timeLabel.setBorder(new EmptyBorder(0, 15, 0, 0));
 		timeLabel.setText(String.format("%04d. %02d. %02d.", yearNumber, monthNumber, dayNumber));
@@ -217,7 +218,7 @@ public class DayDialog extends JDialog {
 		content.removeAll();
 
 		content.setLayout(new BorderLayout());
-		content.setBackground(new Color(0xE4ACA0));										// new Schedule Color
+		content.setBackground(new Color(0xE4ACA0)); // new Schedule Color
 
 		JLabel sLabel = new JLabel();
 		sLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -233,7 +234,11 @@ public class DayDialog extends JDialog {
 		JPanel subjectPanel = new JPanel();
 		subjectPanel.setLayout(new BorderLayout());
 		subjectPanel.setBackground(Color.WHITE);
-		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x0E4ACA0)));		// Border Color of new Schedule				
+		subjectPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0x0E4ACA0))); // Border
+																					// Color
+																					// of
+																					// new
+																					// Schedule
 
 		JLabel subjectLabel = new JLabel(s.getSubject());
 		subjectLabel.setForeground(Color.BLACK);
@@ -264,7 +269,13 @@ public class DayDialog extends JDialog {
 		} else {
 			JPanel sPanel = new JPanel();
 			sPanel.setLayout(new BorderLayout());
-			sPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0xDD9787)));				// Border of Text Box "Tap add button~"
+			sPanel.setBorder(new MatteBorder(1, 1, 1, 1, new Color(0xDD9787))); // Border
+																				// of
+																				// Text
+																				// Box
+																				// "Tap
+																				// add
+																				// button~"
 			sPanel.setBackground(Color.WHITE);
 
 			JLabel subjectLabel = new JLabel("Tap add button to start your planner!");

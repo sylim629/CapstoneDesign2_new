@@ -89,13 +89,15 @@ public class ScheduleManager {
 				writer.write(String.valueOf(schedule.getStiker()) + "\n");
 				writer.write(schedule.getContent() + "\n");
 				writer.write(String.valueOf(schedule.getIsDeleted() ? 1 : 0) + "\n");
-//				writer.write(obj.getTaggedFriends() + "\n");
-//				JSONArray taggedFriends = schedule.getTaggedFriends();
+				// writer.write(obj.getTaggedFriends() + "\n");
+				// JSONArray taggedFriends = schedule.getTaggedFriends();
 				ArrayList<String> taggedFriendsIdList = new ArrayList<>();
-//				for (int j = 0; j < taggedFriends.size(); j++) {
-//					JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(j);
-//					taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
-//				}
+				// for (int j = 0; j < taggedFriends.size(); j++) {
+				// JSONObject taggedFriendObj = (JSONObject)
+				// taggedFriends.get(j);
+				// taggedFriendsIdList.add((String)
+				// taggedFriendObj.get("user_id"));
+				// }
 				taggedFriendsIdList = schedule.getTaggedFriendsIdArrayList();
 				for (int j = 0; j < taggedFriendsIdList.size(); j++) {
 					writer.write(taggedFriendsIdList.get(j) + "!@#");
@@ -111,6 +113,13 @@ public class ScheduleManager {
 		}
 	}
 
+	public void deleteScheduleFile() {
+		File file = new File(fileName);
+		if (file.delete()) {
+			System.out.println("File deleted successfully");
+		}
+	}
+	
 	public void setLastSyncTime(Date date) {
 		lastSyncTime = date;
 
@@ -187,13 +196,13 @@ public class ScheduleManager {
 		newSchedule.setUpdateDate(new Date(System.currentTimeMillis()));
 		newSchedule.setSticker(schedule.getStiker());
 		newSchedule.setContent(schedule.getContent());
-//		JSONArray taggedFriends = schedule.getTaggedFriends();
+		// JSONArray taggedFriends = schedule.getTaggedFriends();
 		ArrayList<String> taggedFriendsIdList = new ArrayList<>();
 		taggedFriendsIdList = schedule.getTaggedFriendsIdArrayList();
-//		for (int i = 0; i < taggedFriends.size(); i++) {
-//			JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(i);
-//			taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
-//		}
+		// for (int i = 0; i < taggedFriends.size(); i++) {
+		// JSONObject taggedFriendObj = (JSONObject) taggedFriends.get(i);
+		// taggedFriendsIdList.add((String) taggedFriendObj.get("user_id"));
+		// }
 		newSchedule.setTaggedFriends(taggedFriendsIdList);
 
 		scheduleList.add(newSchedule);

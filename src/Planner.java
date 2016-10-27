@@ -17,7 +17,6 @@ import View.MonthView;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 public class Planner extends JFrame {
 	private static final long serialVersionUID = 7594201658394504244L;
 
@@ -26,12 +25,13 @@ public class Planner extends JFrame {
 	private int yearNumber;
 	private int monthNumber;
 	private static Timer timer = null;
-
-	// private static int MINUTE = 10;
+//	private static int MINUTE = 10;
 	public Planner() {
 		Date currentTime = Calendar.getInstance().getTime();
-		yearNumber = new Integer(new SimpleDateFormat("yyyy").format(currentTime)).intValue();
-		monthNumber = new Integer(new SimpleDateFormat("MM").format(currentTime)).intValue();
+		yearNumber = new Integer(
+				new SimpleDateFormat("yyyy").format(currentTime)).intValue();
+		monthNumber = new Integer(
+				new SimpleDateFormat("MM").format(currentTime)).intValue();
 
 		monthView = new MonthView(this, yearNumber, monthNumber);
 		this.add(monthView);
@@ -62,10 +62,10 @@ public class Planner extends JFrame {
 				super.windowClosed(e);
 			}
 		});
-
+		
 		LoginManager.sharedInstance().loginFacebook();
 		new FriendsList().printfriend();
-
+		
 		timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
@@ -73,14 +73,6 @@ public class Planner extends JFrame {
 				SyncManager.sharedInstance().synchronizeServer();
 			}
 		};
-		timer.scheduleAtFixedRate(task, new Date(), 20000); // 20초마다 동기화
-		
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				ScheduleManager.sharedInstance().deleteScheduleFile();
-			}
-		}));
+		timer.scheduleAtFixedRate(task, new Date(), 20000);	// 20초마다 동기화
 	}
 }

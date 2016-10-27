@@ -343,6 +343,8 @@ public class AddDialog extends JDialog {
 				} else {
 					ScheduleManager.sharedInstance().addSchedule(schedule);
 				}
+				ScheduleManager.sharedInstance().saveSchedule();
+
 				setVisible(false);
 			}
 		});

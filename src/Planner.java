@@ -47,6 +47,8 @@ public class Planner extends JFrame {
 	}
 
 	static public void main(String[] args) {
+		ScheduleManager.sharedInstance().loadSchedule();
+
 		Planner planner = new Planner();
 		planner.pack();
 		planner.setSize(800, 600);

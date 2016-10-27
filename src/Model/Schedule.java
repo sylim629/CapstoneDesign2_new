@@ -100,7 +100,7 @@ public class Schedule {
 	public JSONArray getTaggedFriends() {
 		return taggedFriends;
 	}
-	
+
 	public ArrayList<String> getTaggedFriendsIdArrayList() {
 		ArrayList<String> idList = new ArrayList<>();
 		for (int i = 0; i < taggedFriends.size(); i++) {
@@ -149,7 +149,7 @@ public class Schedule {
 	public void setSticker(int icon) {
 		sticker = icon;
 	}
-	
+
 	public void setTaggedFriendsDirect(JSONArray friendsArray) {
 		taggedFriends = friendsArray;
 	}
@@ -244,7 +244,13 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return new String("{ Schedule:{ Subject:\"" + Subject + "\", Content:\"" + Content + "\", StartDate:\""
-				+ StartDate.toString() + "\", EndDate:\"" + EndDate.toString() + "\" } }");
+		String taggedFriendsId = "";
+		ArrayList<String> taggedFriendsIdList = new ArrayList<>();
+		taggedFriendsIdList = getTaggedFriendsIdArrayList();
+		for (int i = 0; i < taggedFriendsIdList.size(); i++) {
+			taggedFriendsId += taggedFriendsIdList.get(i) + ", ";
+		}
+		return new String("Schedule: Subject: " + Subject + ", Content: " + Content + ", StartDate: "
+				+ StartDate.toString() + ", EndDate: " + EndDate.toString() + ", TaggedFriends: " + taggedFriendsId);
 	}
 }

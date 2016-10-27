@@ -1,11 +1,8 @@
 package Manager;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import Model.Schedule;
 
@@ -28,91 +25,6 @@ public class ScheduleManager {
 		return singleton;
 	}
 
-	public void loadSchedule() {
-		Scanner scanner;
-		File file = new File(fileName);
-		if (file.exists()) {
-			try {
-				scanner = new Scanner(file);
-
-				int count = scanner.nextInt();
-				scanner.nextLine();
-				for (int i = 0; i < count; i++) {
-					Schedule schedule = new Schedule();
-					schedule.setServerId(String.valueOf(scanner.nextInt()));
-					schedule.setIndex(i);
-					scanner.nextLine();
-					schedule.setSubject(scanner.nextLine());
-					schedule.setStartDate(new Date(scanner.nextLong()));
-					schedule.setEndDate(new Date(scanner.nextLong()));
-					schedule.setCreateDate(new Date(scanner.nextLong()));
-					schedule.setUpdateDate(new Date(scanner.nextLong()));
-					schedule.setSticker(scanner.nextInt());
-					scanner.nextLine();
-					schedule.setContent(scanner.nextLine());
-					schedule.setIsDeleted(scanner.nextInt() != 0);
-					scanner.nextLine();
-					String taggedFriends = scanner.nextLine();
-					String[] taggedFriendsArray = taggedFriends.split("!@#");
-					ArrayList<String> taggedFriendsList = new ArrayList<>();
-					for (int j = 0; j < taggedFriendsArray.length; j++) {
-						taggedFriendsList.add(taggedFriendsArray[j]);
-					}
-					schedule.setTaggedFriends(taggedFriendsList);
-
-					scheduleList.add(schedule);
-				}
-
-				lastSyncTime = new Date(scanner.nextLong());
-
-				scanner.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void saveSchedule() {
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter(new File(fileName));
-
-			writer.write(new Integer(scheduleList.size()).toString() + "\n");
-			for (int i = 0; i < scheduleList.size(); i++) {
-				Schedule schedule = scheduleList.get(i);
-				writer.write(schedule.getServerId() + "\n");
-				writer.write(schedule.getSubject() + "\n");
-				writer.write(new Long(schedule.getStartDate().getTime()).toString() + "\n");
-				writer.write(new Long(schedule.getEndDate().getTime()).toString() + "\n");
-				writer.write(new Long(schedule.getCreateDate().getTime()).toString() + "\n");
-				writer.write(new Long(schedule.getUpdateDate().getTime()).toString() + "\n");
-				writer.write(String.valueOf(schedule.getStiker()) + "\n");
-				writer.write(schedule.getContent() + "\n");
-				writer.write(String.valueOf(schedule.getIsDeleted() ? 1 : 0) + "\n");
-				// writer.write(obj.getTaggedFriends() + "\n");
-				// JSONArray taggedFriends = schedule.getTaggedFriends();
-				ArrayList<String> taggedFriendsIdList = new ArrayList<>();
-				// for (int j = 0; j < taggedFriends.size(); j++) {
-				// JSONObject taggedFriendObj = (JSONObject)
-				// taggedFriends.get(j);
-				// taggedFriendsIdList.add((String)
-				// taggedFriendObj.get("user_id"));
-				// }
-				taggedFriendsIdList = schedule.getTaggedFriendsIdArrayList();
-				for (int j = 0; j < taggedFriendsIdList.size(); j++) {
-					writer.write(taggedFriendsIdList.get(j) + "!@#");
-				}
-				writer.write("\n");
-			}
-
-			writer.write(new Long(lastSyncTime.getTime()).toString() + "\n");
-
-			writer.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void deleteScheduleFile() {
 		File file = new File(fileName);
 		if (file.delete()) {
@@ -122,8 +34,6 @@ public class ScheduleManager {
 	
 	public void setLastSyncTime(Date date) {
 		lastSyncTime = date;
-
-		saveSchedule();
 	}
 
 	public Date getLastSyncTime() {
@@ -207,8 +117,6 @@ public class ScheduleManager {
 
 		scheduleList.add(newSchedule);
 
-		saveSchedule();
-
 		if (scheduleCallback != null)
 			scheduleCallback.onAddedSchedule(newSchedule);
 
@@ -220,8 +128,6 @@ public class ScheduleManager {
 			return;
 
 		schedule.update();
-
-		saveSchedule();
 	}
 
 	public void deleteSchedule(Schedule schedule) {
@@ -240,8 +146,6 @@ public class ScheduleManager {
 		// for (Schedule s : deleteList) {
 		// scheduleList.remove(s);
 		// }
-
-		saveSchedule();
 
 		if (scheduleCallback != null)
 			scheduleCallback.onDeletedSchedule(schedule);

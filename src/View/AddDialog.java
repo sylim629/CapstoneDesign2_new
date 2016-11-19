@@ -53,6 +53,8 @@ public class AddDialog extends JDialog {
 
 	private JButton tagAtButton;
 	private JLabel friendListLabel;
+	
+	private JLabel spendingLabel;	// 지출 금액 표시	// added
 
 	private Date startDate;
 	private Date endDate;
@@ -273,6 +275,14 @@ public class AddDialog extends JDialog {
 			friendListLabel.setText(names);
 		}
 
+		// added
+		JPanel spendingPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		spendingLabel = new JLabel();
+		String money = "25000원-시험";
+		spendingLabel.setText("사용금액 : " + money);
+		spendingPanel.add(spendingLabel);
+		// added end
+		
 		tagAtButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tagListView tagFriendsDialog = new tagListView(parentComp, new tagListView.Callbacks() {
@@ -293,6 +303,7 @@ public class AddDialog extends JDialog {
 		tagAtButton.addKeyListener(keyListener);
 
 		bottomPanel.add(tagPanel, BorderLayout.NORTH);
+		bottomPanel.add(spendingPanel, BorderLayout.EAST);		// added
 
 		JPanel buttonPanel = new JPanel();
 		if (scheduleObject != null)
